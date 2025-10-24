@@ -1,10 +1,13 @@
 import pandas as pd
-def main():
-    df = pd.read_excel("data_final.xlsx")
-    df["valid"] = df['profiles_presented'].apply(lambda x: False if "14" in x and "15" in x else True)
-    df.to_excel("data checked.xlsx",index=False)
-    print(df.head())
-    print("Done")
-    
-if __name__=="__main__":
-    main()
+
+df = pd.read_csv("combined_choice_data_v2.csv", low_memory=False)
+mah_df = df[df['Market'] == 'Maharashtra']
+print("Unique values in FC:", mah_df['FC'].unique())
+print("Unique values in herd_size:", mah_df['herd_size'].unique())
+print("Unique values in cattle_type:", mah_df['cattle_type'].unique())
+print("FC for None brand:", mah_df[mah_df['Brand'] == 'None']['FC'].value_counts())
+
+mah_df = df[df['Market'] == 'Maharashtra']
+print("Unique values in AH:", mah_df['AH'].unique())
+print("Unique values in VAS:", mah_df['VAS'].unique())
+print("Unique values in Credit:", mah_df['Credit'].unique())
